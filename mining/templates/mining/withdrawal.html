@@ -1,0 +1,10 @@
+<div class="container mt-4">
+    <h2>Create a New withdrawal</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.withdrawal_amount }}
+        <button type="submit" class="btn btn-primary mt-2">withdrawal</button>
+    </form>
+    <!-- Add a link to the "Track Invoice" page after the form -->
+    
+</div>

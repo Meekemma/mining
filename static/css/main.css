@@ -1,0 +1,346 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;900&display=swap");
+
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+@media (max-width: 768px) {
+    .diversify {
+        
+        background-size: contain;
+        padding: 10px;
+    }
+    .social img {
+        width: 20%;
+      }
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.58;
+    background: #000000;
+    color: #ffffff;
+
+}
+ul{
+    list-style: none;
+}
+
+h1,h2,h3,h4,h5{
+    color: #fff;
+}
+a{
+    color: #ffff;
+    text-decoration: none;
+}
+p{
+    margin: 0.5rem 0;
+}
+img{
+    width: 100%;
+    object-fit: cover;
+}
+
+/*I--------------NDEX.HTML-------------------------------------------------------*/
+.showcase{
+    width: 100%;
+    height: 80vh;
+    position: relative;
+    background: url('../images/bit.jpg') no-repeat center center/cover;
+
+}
+.showcase::after{
+	content: '';
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.6);
+	box-shadow: inset 120px 100px 250px #000000,inset -120px -100px 250px #000000;
+}
+
+.showcase-content h1{
+    font-weight: 700;
+    font-size: 5.2rem;
+    line-height: 1.1;
+    margin: 0 0 2rem;
+}
+
+.card{
+    border-radius: 20px;
+}
+.card-info:hover{
+    background-color: #080402;
+    color: #fff;
+    border: solid #ffff00;
+    transition: background-color 0.3s ease;
+    
+}
+.card-info h5:hover{
+    color:#ffff00
+}
+
+.bitcoin-image {
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    width:80%; 
+    height: 200px; 
+    margin: 0 auto; 
+    margin-bottom: 20px; 
+}
+
+.bitcoin-image img {
+    width: 50%; 
+    height: 100%; 
+    object-fit: cover; 
+    border: 3px solid #333; 
+    border-radius: 50%;
+}
+.table-container {
+    max-height: 400px; /* Set the desired height for the scrollable area */
+    overflow: auto;
+}
+
+.crypto-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.crypto-table th,
+.crypto-table td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+}
+.crypto-table th {
+    background-color: #333;
+    font-weight: bold;
+}
+.crypto-table tr:nth-child(even) {
+    background-color: #555;
+}
+.crypto-table tr:hover {
+    background-color: #FFD700;
+    color: #000;
+    transition: background-color 0.3s ease;
+}
+
+.card-style{
+    background-color: #333;
+}
+
+.starter{
+    background-color: #FFD700;
+    opacity: 0.8;
+    border-radius: 10%;
+}
+
+.accordion-button {
+    background-color: #333;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+
+.accordion-button:not(.collapsed) {
+    background-color: #555; 
+}
+
+.accordion-button:hover {
+    background-color: #444; 
+}
+
+.accordion-body {
+    background-color: #444; 
+    color: #fff; 
+    border: 1px solid #555; 
+    font-size: 16px; 
+    padding: 20px; 
+  }
+
+.diversify{
+    background-image: url(../images/diversify.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: relative;
+    z-index: -1;
+    opacity: 0.8;
+    
+}  
+.diversify h1 {
+    color: #ffffff;
+    font-weight: bold; 
+    z-index: 2;
+}
+
+
+.diversify p {
+    color: #FFD700;
+    font-weight: normal; 
+    z-index: 2;
+}
+
+.numbers h1{
+    font-family: 700;
+    font-size: 60px;
+    color: #fff;
+}
+.numbers h2{
+    color: #FFD700;
+}
+
+.test{
+    width: 20rem; 
+    background-color: #333; 
+    color: #fff; 
+}
+
+.test img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: fill;
+    margin-left: 10px;
+    margin-top: 10px;
+
+}
+.social {
+    width: 20%;
+    margin: 0 auto;
+}
+.social img {
+    width: 10%; 
+    margin: 0; 
+  }
+.social li{
+    display: inline;
+}
+
+
+
+/*-----------------------------------CONTACT PAGE-----------------------------------*/
+.contact {
+    margin-top: 100px;
+    width: 600px;
+    background-color: #1B1212;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+
+.contact form {
+    margin-top: 20px;
+}
+
+.contact form button {
+    background-color: #FFD700;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact form button:hover {
+    background-color: #fff;
+}
+
+.info {
+    margin: 0 auto;
+    background-color: #FFD700;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info h1 {
+    font-size: 24px;
+    color: #333333;
+    margin-top: 0;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeIn 5s ease-out forwards;
+}
+.info p{
+    font-size: 16px;
+    color: #000;
+    opacity: 0;
+    animation: fadeIn 5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+.contact-link {
+    display: flex;
+    float: left;
+    justify-content: space-between;
+    max-width: 300px;
+    margin: 20px auto;
+    opacity: 0;
+    animation: fadeIn 5s ease-out forwards; 
+}
+
+.contact-link a img {
+    max-width: 20px;
+    height: auto;
+    display: block;
+}
+
+.icon-container i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    height: 60px;
+    width: 90px; 
+    opacity: 0;
+    animation: fadeIn 5s ease-out forwards; 
+  }
+
+/*----------profile PAGE ---------------*/
+
+.card-profile {
+    padding: 50px;
+}
+
+.custom-submit-button {
+    width: 100%; /* Adjust the width as needed */
+}
+
+/*------------------------------ABOUT PAGE-----------------------------*/
+.investment h3{
+    font-weight: 100;
+    color: #FFD700;
+}
+
+/*-----------------------------diversity PAGE--------------------------*/
+.Inclusiveness, .Flexibility, .diversity{
+    color: #FFD700;
+}
+
+/*-----------------------------sponsoring PAGE--------------------------*/
+.sponsoring {
+    margin-top: 100px; /* You can adjust this value as needed */
+}
+.sponsoring h1 {
+    font-size: 50px; /* You can adjust this value to make the heading bigger */
+}
+.space{
+    margin-top: 200px;
+}

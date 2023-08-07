@@ -1,0 +1,88 @@
+<!-- mining/dashboard.html template -->
+<h1>Welcome to your Dashboard</h1>
+    
+    {% if updated_balance is not None %}
+        <p>Your updated balance: {{ updated_balance }}</p>
+    {% else %}
+        <p>No balance found for your account.</p>
+    {% endif %}
+
+{% if pending_deposits %}
+    <h2>Pending Deposits:</h2>
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for deposit in pending_deposits %}
+            <tr>
+                <td>{{ deposit.deposit_amount }}</td>
+                <td>Pending</td>
+                <td>{{ deposit.deposit_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No pending deposits found.</p>
+{% endif %}
+
+{% if completed_deposits %}
+    <h2>Completed Deposits:</h2>
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for deposit in completed_deposits %}
+            <tr>
+                <td>{{ deposit.deposit_amount }}</td>
+                <td>Completed</td>
+                <td>{{ deposit.deposit_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No completed deposits found.</p>
+{% endif %}
+
+{% if pending_withdrawals %}
+    <h2>Pending Withdrawals:</h2>
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for withdrawal in pending_withdrawals %}
+            <tr>
+                <td>{{ withdrawal.withdrawal_amount }}</td>
+                <td>Pending</td>
+                <td>{{ withdrawal.withdrawal_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No pending withdrawals found.</p>
+{% endif %}
+
+{% if completed_withdrawals %}
+    <h2>Completed Withdrawals:</h2>
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for withdrawal in completed_withdrawals %}
+            <tr>
+                <td>{{ withdrawal.withdrawal_amount }}</td>
+                <td>Completed</td>
+                <td>{{ withdrawal.withdrawal_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No completed withdrawals found.</p>
+{% endif %}

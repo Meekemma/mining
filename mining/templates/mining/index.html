@@ -1,0 +1,482 @@
+{% extends 'mining/main.html'%}
+{% load static %}
+
+{% block content %}
+    <!------------------------------------------------SHOWCASE---------------------------------------------------------->
+        <div class="showcase">
+            <div class="showcase-content">
+                <h1>Largest Bitcoin mining company 
+                    Start bitcoin mining today</h1>
+            </div>
+        </div>
+
+
+        <div class="container mt-5">
+            <div class="crypto text-center">
+                <h1 class="text-capitalize fw-bolder">The most trusted cryptocurrency platform</h1>
+                <p>Here are a few reasons why you should choose us</p>
+            </div>
+
+            <div class="row justify-content-center">
+              
+              <h5 class="text-warning">Cryptocurrency Prices in USD</h5>
+              <div class="table-container">
+              <table class="crypto-table">
+                <thead>
+                    <tr>
+                        <th>Coin</th>
+                        <th>Price</th>
+                        <th>Circulating Supply</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for symbol, data in prices.items %}
+                        <tr>
+                            <td>{{ data.name }} ({{ symbol }})</td>
+                            <td>${{ data.price }}</td>
+                            <td>{{ data.circulating_supply }} {{ symbol }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+
+            <!-- Your existing card content here -->
+       
+
+    <!-- Your existing content here -->
+
+              
+
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-3 d-flex justify-content-center">
+                    <div class="card card-info" style="width: 22rem;">
+                        <div class="card-body">
+                            <i class="fa-solid fa-seal fa-spin fa-lg" style="color: #def434;"></i>
+                          <h5 class="card-title text-capitalize">Industry best practices</h5>
+                          <p class="card-text">Climax Trade Investment supports a variety of the most popular digital currencies.</p>
+                          
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-3 d-flex justify-content-center">
+
+                    <div class="card card-info" style="width: 22rem;">
+                        <div class="card-body">
+                            <i class="fa-solid fa-seal fa-spin fa-lg" style="color: #def434;"></i>
+                          <h5 class="card-title text-capitalize">Secure storage</h5>
+                          <p class="card-text">We store the vast majority of the digital assets in secure offline storage.</p>
+                          
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-3 d-flex justify-content-center">
+
+                    <div class="card card-info" style="width: 22rem;">
+                        <div class="card-body">
+                            <i class="fa-solid fa-seal fa-spin fa-lg" style="color: #def434;"></i>
+                          <h5 class="card-title text-capitalize">Account privacy</h5>
+                          <p class="card-text">We will never share your private data without your permission</p>
+                          
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="text-wrap mt-5">
+                        <h4>Let's Mine</h4>
+                        <h5>Focused, Active Management of High-Growth Digital Assets.</h5>
+                        <p>Climax Trade Investment Inc is a registered investment platform providing digital asset investment management services to individuals. We provide a dynamic investment solution to clients in need of a self-operating portfolio, 
+                            as well as a smart fund with flexible time and investment amount. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, 
+                            qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per laoreet sit amet cursus seacula qui mutationem consuetudium claritas est etiam processus dynamicus
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="bitcoin-image">
+                        <img src="{%static 'images/bitcoincup.jpg'%}" alt="">
+                        <img src="{%static 'images/bitcoin2.jpg'%}" alt="">
+                        <img src="{%static 'images/bitcoin4.jpg'%}" alt="">
+                        <img src="{%static 'images/bitcoin3.jpg'%}" alt="">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="container my-5">
+            <div class="row text-center justify-content-center">
+                <div class="col-lg-4 col-md-6 col-sm-12 my-3  d-flex justify-content-center">
+                    <div class="card card-style" style="width: 22rem;">
+                        
+                        <div class="card-body">
+                          <div class="card-text">
+                            <h4 class="text-uppercase my-2">starter pack</h4>
+                            <div class="starter my-2 py-5">
+                                <h5 class="fw-bolder">Price</h5>
+                                <h4 class="fw-bolder">$500</h4>
+                                <h5 class="fw-bolder">0.016778BTC</h5>
+                            </div>
+
+                            <div>
+                                <h5>Duration:</h5>
+                                <h5>3 days</h5>
+                                <hr class="text-white">
+
+                                <h5>Referral:</h5>
+                                <h5>2%</h5>
+                                <hr class="text-white">
+
+                                <h5>Hashrate:</h5>
+                                <h5>5Ph/s</h5>
+                                <hr class="text-white">
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-12 my-3  d-flex justify-content-center">
+                    <div class="card card-style" style="width: 22rem;">
+                        
+                        <div class="card-body ">
+                          <div class="card-text">
+                            <h4 class="text-uppercase my-2">gold pack</h4>
+                            <div class="starter my-2 py-5">
+                                <h5 class="fw-bolder">Price</h5>
+                                <h4 class="fw-bolder">$1,000</h4>
+                                <h5 class="fw-bolder">0.033556BTC</h5>
+                            </div>
+
+                            <div>
+                                <h5>Duration:</h5>
+                                <h5>5 days</h5>
+                                <hr class="text-white">
+
+                                <h5>Referral:</h5>
+                                <h5>2.5%</h5>
+                                <hr class="text-white">
+
+                                <h5>Hashrate:</h5>
+                                <h5>10Ph/s</h5>
+                                <hr class="text-white">
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 my-3  d-flex justify-content-center">
+                    <div class="card card-style" style="width: 22rem;">
+                        
+                        <div class="card-body">
+                          <div class="card-text">
+                            <h4 class="text-uppercase my-2">premium pack</h4>
+                            <div class="starter my-2 py-5">
+                                <h5 class="fw-bolder">Price</h5>
+                                <h4 class="fw-bolder">$2,000</h4>
+                                <h5 class="fw-bolder">0.067112BTC</h5>
+                            </div>
+
+                            <div>
+                                <h5>Duration:</h5>
+                                <h5>7 days</h5>
+                                <hr class="text-white">
+
+                                <h5>Referral:</h5>
+                                <h5>10%</h5>
+                                <hr class="text-white">
+
+                                <h5>Hashrate:</h5>
+                                <h5>15Ph/s</h5>
+                                <hr class="text-white">
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    <!----------------------------------FAQ-------------------------------------------------------------------------->
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <h1 class="text-capitalize my-5 text-start" style="color: #FFD700;">frequent questions</h1>
+                <h3 class="text-wrap text-start">Build your savings without even trying</h3>
+                <p class="text-start" style="color: #F0EAD6;">
+                    Turn on Round-up Rules and start saving up effortlessly. Whenever you make a purchase, 
+                    Goals make it easy to save for the things you want or want to do. 
+                    There's no need for spreadsheets or extra apps to budget and track your money.
+                </p>
+
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+
+                <div class="accordion" id="accordionExample">
+                    <!----------------------------------------------ITEM-1--------------------------->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <strong>What is Climax Trade Investment?</strong>
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <p>investment firm. The platform, which includes advanced basic and technical analysis at the source of high return performance, 
+                            offers high & fixed interest return. Aiming for success with its international investor network, 
+                            experienced team, privileged information from business and technology world; 
+                            Climax Trade Investment stands out from its competitors with its proven quality and ease of use. The company, 
+                            which is managed under the leadership of people who think and anticipate the future,
+                             is committed to achieving high returns from well-diversified portfolios and prioritizing clients.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!----------------------------------------------ITEM-2--------------------------->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <strong>Guaranteed interest returns, but how?</strong>
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <p>
+                            Digital assets are a class of assets considered dangerous and inconvenient.
+                            Many reasons such as liquidity, 
+                            money laundering accusation, uncertainty of regulation, access restriction, volatile markets, 
+                            functionality inquiries reduce trust in these assets. We believe that the risk factor should be eliminated for all people who believe that finance will rise on distributed systems. 
+                            That's why we offer high interest returns to platform investors. With careful and detailed examination of market conditions, 
+                            daily trading volume, expectations; we change our portfolio distribution and adjust our investment strategy. 
+                            With this active fund management, 
+                            you enjoy the fixed interest rate return on the user side.
+                        </p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!----------------------------------------------ITEM-3--------------------------->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <strong>What are company principles?</strong>
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>
+                                Successful investment management companies base their business on a core investment philosophy, 
+                                and Climax Trade Investment is no different. Although we offer innovative and specific strategies through digital asset funds,
+                                an overarching theme runs through the investment guidance we provide to clients— focus on those things within your control.
+                                There are basically four principles that we attach great importance to:
+                            </p>
+                            <p>
+                                <strong >1.clear, appropriate investment goals:</strong> An appropriate investment goal should be measureable and attainable. 
+                                Success should not depend on outsize investment returns or impractical saving or spending requirements.
+                            </p>
+                            <p>
+                                 <strong>2. A suitable asset allocation using broadly diversified funds:</strong>
+                                 A sound investment strategy starts with an asset allocation befitting the portfolio's objective. 
+                                 The allocation should be built upon reasonable expectations for risk and returns and use diversified investments to avoid exposure to unnecessary risks.
+                            </p>
+                            
+                            <p>
+                                <strong>3. Minimize cost:</strong> Markets are unpredictable. Costs are forever. 
+                                The lower your costs, the greater your share of an investment's return.
+                                 And research suggests that lower-cost investments have tended to outperform higher-cost alternatives. 
+                                 To hold onto even more of your return, manage for efficiency. 
+                                You can't control the markets, but you can control the bite of costs and efficiency.
+                            </p>
+
+                            <p>
+                                <strong>4. Maintain perspective and long-term discipline:</strong> Investing can provoke strong emotions. 
+                                In the face of market turmoil, some investors may find themselves making impulsive decisions or, conversely, 
+                                becoming paralyzed, unable to implement an investment strategy or rebalance a portfolio as needed. 
+                                Discipline and perspective can help them remain committed to a long-term investment program through periods of market uncertainty.
+                            </p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!----------------------------------------------ITEM-4--------------------------->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                              <strong>Guaranteed interest returns, but how?</strong>
+                          </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <p>
+                              Digital assets are a class of assets considered dangerous and inconvenient.
+                              Many reasons such as liquidity, 
+                              money laundering accusation, uncertainty of regulation, access restriction, volatile markets, 
+                              functionality inquiries reduce trust in these assets. We believe that the risk factor should be eliminated for all people who believe that finance will rise on distributed systems. 
+                              That's why we offer high interest returns to platform investors. With careful and detailed examination of market conditions, 
+                              daily trading volume, expectations; we change our portfolio distribution and adjust our investment strategy. 
+                              With this active fund management, 
+                              you enjoy the fixed interest rate return on the user side.
+                          </p>
+                          </div>
+                        </div>
+                      </div>
+
+                    <!----------------------------------------------ITEM-5--------------------------->
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                              <strong>Guaranteed interest returns, but how?</strong>
+                          </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <p>
+                              Digital assets are a class of assets considered dangerous and inconvenient.
+                              Many reasons such as liquidity, 
+                              money laundering accusation, uncertainty of regulation, access restriction, volatile markets, 
+                              functionality inquiries reduce trust in these assets. We believe that the risk factor should be eliminated for all people who believe that finance will rise on distributed systems. 
+                              That's why we offer high interest returns to platform investors. With careful and detailed examination of market conditions, 
+                              daily trading volume, expectations; we change our portfolio distribution and adjust our investment strategy. 
+                              With this active fund management, 
+                              you enjoy the fixed interest rate return on the user side.
+                          </p>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container my-5">
+        <div class="diversify">
+            <h1>Diversify your investment porfolio</h1>
+            <p class="fw-bold">
+                Climax Trade Investment is fully legit and officially registered company whose activities are regulated by the financial control authorities under the jurisdiction of the United Kingdom. 
+                Accepting our terms of coorperation, you can be absolutely sure of getting a guaranteed profit and full return on your investment.
+            </p>
+        </div>
+
+
+        <div class="numbers text-center my-5">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 my-3">
+                    <h1>15M+</h1>
+                    <h2>Total asset</h2>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 my-3">
+                    <h1>13M+</h1>
+                    <h2>Years of experience</h2>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 my-3">
+                    <h1>2853</h1>
+                    <h2>Qualified traders</h2>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 my-3">
+                    <h1>57</h1>
+                    <h2>Countries supported</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="testimony">
+            <div class="row justify-content-center">
+              <div class="col-lg-4 col-md-4 col-sm-12 my-3  d-flex justify-content-center">
+                <div class="card test">
+                  <div class="d-flex">
+                    <img src="{% static 'images/girl.jpg'%}" class="card-img-top" alt="...">
+                    <div class="mt-3 mx-3">
+                      <h5>Erica Lake</h5>
+                      <p>Market analyst</p>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="col-lg-4 col-md-4 col-sm-12 my-3  d-flex justify-content-center">
+                <div class="card test">
+                  <div class="d-flex">
+                    <img src="{% static 'images/girl.jpg'%}" class="card-img-top" alt="...">
+                    <div class="mt-3 mx-3">
+                      <h5>Erica Lake</h5>
+                      <p>Market analyst</p>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="col-lg-4 col-md-4 col-sm-12 my-3  d-flex justify-content-center">
+                <div class="card test">
+                  <div class="d-flex">
+                    <img src="{% static 'images/girl.jpg'%}" class="card-img-top" alt="...">
+                    <div class="mt-3 mx-3">
+                      <h5>Erica Lake</h5>
+                      <p>Market analyst</p>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+    </div>
+
+
+
+
+
+        
+
+
+{% endblock %}
