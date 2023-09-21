@@ -18,14 +18,17 @@
         <h4 class="title is-4">Order#: {{order_id}}</h4>
         <hr>     
         <div class="row">
-            <div id="paymentstatus" style="color:blue;display:true;">Payment Status: {{status}}</div>
+          <div id="paymentstatus" style="color: blue; display: block;">Payment Status : {{ status }}</div>
+
             <div class="col-md-6 col-sm-12">
-            <p>Amount: <strong>{{bits}}</strong> BTC ⇌ <strong>{{value}}</strong> USD</p>
-            <p>Bitcoin Address : <strong>{{addr}}</strong></p>
-            <a href="bitcoin:{{addr}}?amount={{bits}}">
-                <img src="https://www.bitcoinqrcodemaker.com/api/?style=bitcoin&address={{bc1qj7mje3wxpj0gl4txq9v7jt6aagrhhm2hhmq6v3}}&amount={{bits}}&color=1">
-            </a>   
+              <p>Amount: <strong>{{ invoice.btcvalue|floatformat:"10" }}  BTC</strong> ⇌ <strong>{{invoice.deposit.deposit_amount }}</strong> USD</p>
+              <p>Bitcoin Address: <strong>{{ invoice.address }}</strong></p>
+            <a href="bitcoin:{{ invoice.address }}?amount={{ invoice.btcvalue }}">
+              <img src="https://www.bitcoinqrcodemaker.com/api/?style=bitcoin&address={{ invoice.address }}&amount={{ invoice.btcvalue }}&color=1">
+          </a>
+          
             </div>
+            <!--
             <div class="col-md-6 col-sm-12">
                 <h4 class="subtitle">Order Details: </h4>
                 <table class="table">
@@ -46,13 +49,19 @@
                     
                 </tbody>
                 </table>
-                {% if path %}
-                <div>
-                    <img id="my_image" src='{{path}}'>
-                </div>
-                {% endif %}
+               
             </div>
         </div>
+      -->
+      
+<h1>Invoice Details</h1>
+
+<p><strong>Order ID:</strong> {{ invoice.order_id }}</p>
+<p><strong>Payment Address:</strong> {{ invoice.address }}</p>
+<p><strong>BTC Value:</strong> {{ invoice.btcvalue }}</p>
+<p><strong>Deposit Amount:</strong> {{ invoice.deposit.deposit_amount }}</p>
+
+<!-- Add more invoice details here as needed -->
       </div>
       <script type="text/javascript">
         var address="{{addr}}";

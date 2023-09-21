@@ -16,7 +16,7 @@ from .forms import ContactForm,CreateUserForm,ProfileForm,DepositForm,Withdrawal
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from .decorators import unaunthenticated_user,allowed_users,admin_only
-
+from django.db.models import Q
 from.models import *
 
 # Create your views here.
@@ -26,12 +26,11 @@ from.models import *
 #---------------------------REGISTER PAGE---------------------------------------------------
 
 def register_page(request):
-
     if request.method == 'POST':
-        form=CreateUserForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            username= form.cleaned_data.get('username')
+            username = form.cleaned_data.get('username')
 
             messages.success(request, 'Account successfully created for ' + username)
 
@@ -42,15 +41,56 @@ def register_page(request):
                 template,
                 settings.EMAIL_HOST_USER,
                 [user.profile.email],
-                )
-            email.fail_silently =False
+            )
+            email.fail_silently = False
             email.send()
+
             return redirect('login')
     else:
-        form=CreateUserForm()    
+        form = CreateUserForm()
+
+    context = {'form': form}
+    return render(request, 'mining/register.html', context)
 
 
-    context={'form': form}
+
+
+def register_with_referrer_view(request, referral_code,pk):
+    try:
+        profile =Profile.objects.get(id=pk)
+        referrer = Referral.objects.filter(referral_code=referral_code, profile=profile).first()
+
+         # Store referral information in session
+        request.session['referral_code'] = referral_code
+        request.session['referrer_pk'] = referrer.profile.pk if referrer else None
+
+    except Profile.DoesNotExist:
+        return HttpResponse("Referrer does not exist")    
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+
+            messages.success(request, 'Account successfully created for ' + username)
+
+            template = render_to_string('mining/email_template.html', {'username': username})
+
+            email = EmailMessage(
+                'Welcome to Climax Trade Investment',
+                template,
+                settings.EMAIL_HOST_USER,
+                [user.profile.email],
+            )
+            email.fail_silently = False
+            email.send()
+
+            return redirect('login')
+    else:
+        form = CreateUserForm()
+
+    context = {'form': form, 'referrer':referrer}
     return render(request, 'mining/register.html', context)
 
 
@@ -79,6 +119,8 @@ def login_page(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+
 
 
 #----------------------INDEX PAGE---------------------------------------------------
@@ -125,8 +167,8 @@ def index(request):
 def about_info(request):
 
 
-
-    context = {}
+    domain_name = 'Authentic investment.com'
+    context = {'domain_name':domain_name}
     return render(request, 'mining/about.html', context)
 
 
@@ -214,9 +256,14 @@ def exchanged_rate(amount):
     return amount/response['price']
 
 
-#------------------------DEPOSIT -PAGE-----------------------------------------------
-def deposit_info(request):
 
+
+
+#------------------------DEPOSIT -PAGE-----------------------------------------------
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def deposit_info(request):
+    profile = request.user.profile
     if request.user.is_authenticated:
         if request.method=='POST':
             form=DepositForm(request.POST)
@@ -231,12 +278,15 @@ def deposit_info(request):
     context={'form':form}
     return render(request, 'mining/deposit.html', context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def track_invoice(request, pk):
-    invoice =Invoice.objects.get(id=pk)
+    profile = request.user.profile
+    invoice =Invoice.objects.get(id=pk, profile=profile)
     data = {
             'order_id':invoice.order_id,
             'bits':invoice.btcvalue/1e8,
-            'value':invoice.product.price,
+            'value':invoice.deposit.deposit_amount,
             'addr': invoice.address,
             'status':Invoice.STATUS_CHOICES[invoice.status+1][1],
             'invoice_status': invoice.status,
@@ -244,20 +294,34 @@ def track_invoice(request, pk):
     if (invoice.received):
         data['paid'] =  invoice.received/1e8
         if (int(invoice.btcvalue) <= int(invoice.received)):
-            data['path'] = invoice.product.product_image.url
+            invoice.status = 2
+            invoice.save()
+
+            # Sending email notification
+            template = render_to_string('mining/email_template.html', {'user': invoice.profile.user})
+
+            email = EmailMessage(
+                'Invoice Payment Confirmation',
+                template,
+                settings.EMAIL_HOST_USER,
+                [invoice.profile.user.email],  # Use the correct field for the user's email
+            )
+            email.fail_silently = False
+            email.send()
     else:
         data['paid'] = 0  
 
 
-    context={'data':data}
+    context={'invoice':invoice, 'data':data}
     return render(request,'mining/invoice.html',context)
 
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def create_payment(request, pk):
     deposit = Deposit.objects.get(id=pk)
 
-    api_key = 'HdXGsI89PlYAaRq4aNpdurBKsDlEejh67VswUaDzcEg';
+    api_key = 'HdXGsI89PlYAaRq4aNpdurBKsDlEejh67VswUaDzcEg'
     url = 'https://www.blockonomics.co/api/new_address'
 
     headers = {'Authorization': "Bearer " + api_key}
@@ -266,16 +330,18 @@ def create_payment(request, pk):
     if r.status_code == 200:
         address = r.json()['address']
         print ('Payment receiving address ' + address)
-        bits = exchanged_rate(deposit.deposit_amount)
+        bits = exchanged_rate(float(deposit.deposit_amount))
+        print("bits:",bits)
         order_id = uuid.uuid1()
         invoice = Invoice.objects.create(order_id=order_id, address=address, btcvalue=bits*1e8, deposit=deposit)
-        return HttpResponseRedirect(reverse('track_payment', kwargs={'pk':invoice.id}))
+        return HttpResponseRedirect(reverse('invoice', kwargs={'pk':invoice.id}))
     else:
         print(r.status_code, r.text)
         return HttpResponse("Error while creating payment", status=500)
     
 
-    
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def receive_payment(request):
     
     if (request.method != 'GET'):
@@ -295,47 +361,9 @@ def receive_payment(request):
     invoice.save()  
 
 
-# def deposit_info(request):
-#     if request.method == 'POST':
-#         form = DepositForm(request.POST)
-#         if form.is_valid():
-#             deposit_amount_usd = float(form.cleaned_data['deposit_amount'])
-#             response = requests.get('https://www.blockonomics.co/api/price?currency=USD')
-#             if response.status_code ==200:
-#                 btc_to_usd_rate = response.json()['price']
-#                 print("deposit_amount_usd:", deposit_amount_usd)
-#                 print("btc_to_usd_rate:", btc_to_usd_rate)
-#                 deposit_amount_btc = deposit_amount_usd / btc_to_usd_rate
-#                 print("deposit_amount_btc:", deposit_amount_btc)
-
-#                 form.instance.profile = request.user.profile
 
 
-#             form.save()
-#             return redirect('deposit')
 
-#     else:  
-#         form = DepositForm()
-
-#     context = {'form': form}
-#     return render(request, 'mining/deposit.html', context)
-
-# def withdrawal_info(request):
-#     if request.method == 'POST':
-#         form = WithdrawalForm(request.POST)
-#         if form.is_valid():
-
-#             form.instance.profile = request.user.profile
-
-
-#             form.save()
-#             return redirect('deposit')
-
-#     else:  
-#         form = WithdrawalForm()
-
-#     context = {'form': form}
-#     return render(request, 'mining/withdrawal.html', context)
 
 #-------------------------------------DASHBOARD-----------------------------------------------------
 @login_required(login_url='login')
@@ -344,54 +372,116 @@ def dashboard(request):
     if request.user.is_authenticated:
         profile = request.user.profile
 
-        try:
-            balance = Balance.objects.get(profile=profile)
-        except Balance.DoesNotExist:
-            balance = None    
+         # Replace with the actual user
+        total_deposits = profile.deposit_set.filter(status='p').aggregate(total=models.Sum('deposit_amount'))['total'] or 0
+
         
-        updated_balance = balance.calculate_updated_balance() if balance else None
-        
-        pending_deposits = Deposit.objects.filter(profile=profile, status='P')
-        completed_deposits = Deposit.objects.filter(profile=profile, status='C')
         pending_withdrawals = Withdrawal.objects.filter(profile=profile, status='P')
         completed_withdrawals = Withdrawal.objects.filter(profile=profile, status='C')
         
 
     context = {
-        'updated_balance': updated_balance,
-        'pending_deposits': pending_deposits,
-        'completed_deposits': completed_deposits,
+        'total_deposits': total_deposits,
         'pending_withdrawals': pending_withdrawals,
         'completed_withdrawals': completed_withdrawals,
     }
     return render(request, 'mining/dashboard.html', context)
 
 
-#-------------------------------------DEPOSIT-----------------------------------------------------
-def exchanged_rate(amount):
-    url = "https://www.blockonomics.co/api/price?currency=USD"
-    r = requests.get(url)
-    response = r.json()
-    return amount/response['price']
 
+#-------------------------------------TRANSACTION-----------------------------------------------------
+def transactionPage(request):
+    if request.user.is_authenticated:
+        profile = request.user.profile
 
+        deposits = Deposit.objects.filter(Q(profile=profile),Q(status='C') | Q(status='P')
+        
+)
 
+        
     
-    if (request.method != 'GET'):
-        return 
+            
+    context={'deposits':deposits}
+    return render(request, 'mining/transaction.html', context)
+
+#-------------------------------------WITHDRAWAL-----------------------------------------------------
+
+
+def withdrawal_info(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = WithdrawalForm(request.POST)
+            if form.is_valid():
+                withdrawal_amount = form.cleaned_data['withdrawal_amount']
+                wallet = form.cleaned_data['wallet']
+                pin = form.cleaned_data['pin']
+
+                withdrawal_instance = form.save(commit=False)
+                withdrawal_instance.profile = request.user.profile
+                withdrawal_instance.save()
+
+                # Sending Email notification
+                template = render_to_string('mining/email_template.html', {'user': withdrawal_instance.profile.user})
+                
+                email = EmailMessage(
+                    'Withdrawal in process',
+                    template,
+                    settings.EMAIL_HOST_USER,
+                    [withdrawal_instance.profile.user.email]  # Use the email field of the user
+                )
+                email.fail_silently = False
+                email.send()
+
+                return redirect('dashboard')
+            
+        else:
+            form = WithdrawalForm()    
+    domain_name = 'Authentic investment.com'
+    context = {'form': form ,'domain_name':domain_name}
+    return render(request, 'mining/withdrawal.html', context)
+        
+
+
+
+
+def support_page(request):
+    if request.user.is_authenticated:
+        if request.method =='POST':
+            subject = request.POST['subject']
+            priority = request.POST['Priority']  # Use the correct name attribute
+            details = request.POST['details']
+
+            send_mail(
+                subject,  # Use the subject variable
+                details,  # Use the details variable
+                settings.EMAIL_HOST_USER,
+                ['meek.emma007@gmail.com'],
+                fail_silently=False,
+            )
+            messages.add_message(request, messages.SUCCESS, 'Support request submitted successfully.', extra_tags='support_request')
+            return redirect('support')
+            
+    context={}
+    return render(request, 'mining/support.html', context)
+
+
+
+def plan_view(request):
     
-    txid  = request.GET.get('txid')
-    value = request.GET.get('value')
-    status = request.GET.get('status')
-    addr = request.GET.get('addr')
+            
+    context={}
+    return render(request, 'mining/plans.html', context)
 
-    invoice = Invoice.objects.get(address = addr)
+
+def share_view(request):
     
-    invoice.status = int(status)
-    if (int(status) == 2):
-        invoice.received = value
-    invoice.txid = txid
-    invoice.save()
-    return HttpResponse(200)    
+            
+    context={}
+    return render(request, 'mining/share.html', context)
 
 
+def referal_view(request):
+    
+            
+    context={}
+    return render(request, 'mining/referral.html', context)

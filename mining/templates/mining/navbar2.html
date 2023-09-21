@@ -1,0 +1,74 @@
+
+
+
+<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Authentic investment</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link my-2"  href="{%url 'dashboard'%}">
+                    <i class="fas fa-chart-line mx-3"></i> Dashboard
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link my-2" href="{%url 'deposit'%}">
+                    <i class="fas fa-money-bill mx-3"></i> Deposit
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link my-2" href="{% url 'withdrawal'%}">
+                    <i class="fas fa-money-bill-wave mx-3"></i> Withdrawal
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link my-2" href="{% url 'plans'%}">
+                    <i class="fas fa-cog mx-3"></i> Mining
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link my-2" href="{% url 'share'%}">
+                    <i class="fas fa-share-alt mx-3"></i> Share BTC
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link my-2" href="{%url 'transaction'%}">
+                    <i class="fas fa-exchange-alt mx-3"></i> Transactions
+                  </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                  <a class="nav-link my-2" href="{%url 'support'%}">
+                    <i class="fas fa-life-ring mx-3"></i> Support
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link my-2" href="{% url 'profile'%}">
+                    <i class="fas fa-user mx-3"></i> Account
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link my-2" href="{% url 'referral'%}">
+                    <i class="fas fa-users mx-3"></i> Referral
+                  </a>
+                </li>
+              </ul>
+          
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <img src="{{request.user.profile.profile_pic.url}}" alt="Avatar" class="avatar">
+        <a href="{% url 'logout' %}" class="nav-link my-2 me-5">
+          <i class="fas fa-sign-out-alt mx-3" style="color: gold;"></i>Logout
+        </a>
+      </div>
+      
+    </div>
+</nav> 

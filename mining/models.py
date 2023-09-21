@@ -1,6 +1,9 @@
+import random
+import string
 from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
+from django.utils.functional import cached_property
 
 # Create your models here.
 GENDER_CHOICES = (
@@ -44,6 +47,29 @@ class Cryptocurrency(models.Model):
         return f"Cryptocurrency {self.name} by {self.current_price}"
 
 
+
+
+
+
+class Referral(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='referrals_received')
+    referral_code = models.CharField(max_length=7, unique=True, blank=True)
+    referrer =models.ForeignKey(Profile, on_delete=models.CASCADE,  related_name='referrals_made', blank=True, null=True)
+    bonus = models.DecimalField(max_digits=10, decimal_places=2, default=0.00,blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Referral'
+        verbose_name_plural = 'Referrals'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        profile_username = self.profile.user.username if self.profile else "Unknown"
+        referrer_username = self.referrer.user.username if self.referrer else "Unknown"
+        return f"Referral for {profile_username} by {referrer_username}"   
+
+
+
 class MiningStatus(models.Model):
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     cryptocurrency = models.ForeignKey(Cryptocurrency, on_delete=models.CASCADE)
@@ -66,14 +92,6 @@ class Balance(models.Model):
 
     def __str__(self):
         return f"Balance: {self.amount}"
-    
-    def calculate_updated_balance(self):
-        deposits = self.deposit_set.all().aggregate(total_deposits=models.Sum('deposit_amount'))['total_deposits'] or 0
-        withdrawals = self.withdrawal_set.all().aggregate(total_withdrawals=models.Sum('withdrawal_amount'))['total_withdrawals'] or 0
-        updated_balance = self.amount + deposits - withdrawals
-        return updated_balance
-
-
 
 
 status_choices = (
@@ -85,6 +103,8 @@ class Withdrawal(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     balance = models.ForeignKey(Balance, on_delete=models.CASCADE,blank=True, null=True)
     withdrawal_amount = models.DecimalField(max_digits=15, decimal_places=2)
+    wallet=models.CharField(max_length=100, blank=True, null=True)
+    pin=models.CharField(max_length=100, blank=True, null=True)
     status = models.CharField(max_length=1, choices=status_choices, default='P')
     withdrawal_date = models.DateTimeField(auto_now_add=True)
 
@@ -94,6 +114,8 @@ class Withdrawal(models.Model):
     def __str__(self):
         return f"Withdrawal of {self.withdrawal_amount} by {self.profile}"
     
+
+
 
 status_choices = (
         ('P', 'Pending'),
@@ -111,7 +133,11 @@ class Deposit(models.Model):
         ordering = ['-deposit_date']
 
     def __str__(self):
-        return f"Deposit of {self.deposit_amount} by {self.profile}"    
+        return f"Deposit of {self.deposit_amount} by {self.profile}"  
+    
+    
+    
+       
     
 
 class Invoice(models.Model):
@@ -160,3 +186,4 @@ class Testimony(models.Model):
 
     def __str__(self):
         return self.name
+    

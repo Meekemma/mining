@@ -11,31 +11,29 @@
             secure infrastructure and applications that make a difference.
         </p>
         <div class=" social">
-            <ul>
+            <ul class="list-unstyled social-icons">
                 <li>
-                    <a href="">
-                        <img src="{% static 'images/Facebook_f_logo_(2021).svg.png'%}" alt="">
+                    <a href="#">
+                        <i class="fab fa-facebook-f fa-1x mx-1"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <img src="{% static 'images/Logo_of_Twitter.svg.png'%}" alt="">
+                    <a href="#">
+                        <i class="fab fa-twitter fa-1x mx-1"></i>
                     </a>
                 </li>
-
                 <li>
-                    <a href="">
-                        <img src="{% static 'images/whatsapp.png'%}" alt="">
+                    <a href="#">
+                        <i class="fab fa-whatsapp fa-1x mx-1"></i>
                     </a>
                 </li>
-
                 <li>
-                    <a href="">
-                        <img src="{% static 'images/Instagram_logo_2022.svg.png'%}" alt="">
+                    <a href="#">
+                        <i class="fab fa-instagram fa-1x mx-1"></i>
                     </a>
                 </li>
-
             </ul>
+            
             
 
             
@@ -54,7 +52,19 @@
         
     </div>
     <div class="icon fixed-bottom">
-        <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+        <i class="fa fa-arrow-circle-up fa-4x px-3 py-3" aria-hidden="true" id="scroll-to-top">
+            <a href="#"></a>
+        </i>
     </div>
 
 </div>
+
+<script>
+    document.getElementById("scroll-to-top").addEventListener("click", function() {
+        // Scroll to the top of the page with a smooth animation
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+</script>

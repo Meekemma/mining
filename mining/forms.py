@@ -85,23 +85,43 @@ class ProfileForm(ModelForm):
 
 
 
-class DepositForm(forms.ModelForm):
+class DepositForm(ModelForm):
     class Meta:
         model = Deposit
-        fields = ['deposit_amount']  # Add 'profile' field to the form
+        fields = ['deposit_amount']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
          # Add CSS class to the profile field
-        self.fields['deposit_amount'].widget.attrs.update({'class': 'form-control'}) 
+        self.fields['deposit_amount'].widget.attrs.update({'class': 'form-control'})
+
+        self.fields['deposit_amount'].widget.attrs.update({'placeholder': '$500'})
+
+       
+
+
         
-         # Add CSS class to the deposit_amount field
-class WithdrawalForm(forms.ModelForm):
+class WithdrawalForm(ModelForm):
     class Meta:
         model = Withdrawal
-        fields = ['withdrawal_amount']  # Add 'profile' field to the form
+        fields = ['withdrawal_amount','wallet', 'pin']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-         # Add CSS class to the profile field
-        self.fields['withdrawal_amount'].widget.attrs.update({'class': 'form-control'}) 
+
+        self.fields['withdrawal_amount'].widget.attrs.update({'class': 'form-control'})
+
+        self.fields['withdrawal_amount'].widget.attrs.update({'placeholder': '$500'})
+        self.fields['wallet'].widget.attrs['placeholder'] ='Bitcoin Wallet'
+        self.fields['pin'].widget.attrs['placeholder'] = 'Account Pin'
+        self.fields['pin'].widget = forms.PasswordInput(attrs={'placeholder': 'Enter PIN'})
+        
+
+        #Add labels
+        self.fields['withdrawal_amount'].label = ' Withdrawal Amount'
+        self.fields['wallet'].label = 'Bitcoin Wallet'
+        self.fields['pin'].label = 'Account Pin'
+
+
+
+

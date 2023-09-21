@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'mining.apps.MiningConfig',
     'crispy_forms',
     'crispy_bootstrap4',
+    
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"

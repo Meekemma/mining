@@ -24,6 +24,7 @@ body{
     line-height: 1.58;
     background: #000000;
     color: #ffffff;
+    overflow-x: hidden;
 
 }
 ul{
@@ -46,33 +47,40 @@ img{
 }
 
 /*I--------------NDEX.HTML-------------------------------------------------------*/
-.showcase{
+.showcase {
     width: 100%;
     height: 80vh;
     position: relative;
-    background: url('../images/bit.jpg') no-repeat center center/cover;
-
+    background: url('../images/bit.jpg') no-repeat center center;
+    background-size: cover; /* Ensure the background image covers the entire element */
+       
 }
+
+
 .showcase::after{
 	content: '';
-	width: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-	background: rgba(0, 0, 0, 0.6);
-	box-shadow: inset 120px 100px 250px #000000,inset -120px -100px 250px #000000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure the overlay is on top of the image */
+    background: rgba(0, 0, 0, 0.8);
+	
 }
 
-.showcase-content h1{
-    font-weight: 700;
-    font-size: 5.2rem;
+.coin {
+    font-weight: 500;
+    font-size: 50px;
     line-height: 1.1;
     margin: 0 0 2rem;
+    position: relative;
+    z-index: 2; /* Bring the h1 element forward */
 }
 
+.move{
+    margin-top: 50px;
+}
 .card{
     border-radius: 20px;
 }
@@ -93,8 +101,7 @@ img{
     justify-content: space-between; 
     width:80%; 
     height: 200px; 
-    margin: 0 auto; 
-    margin-bottom: 20px; 
+    margin-bottom: 150px; 
 }
 
 .bitcoin-image img {
@@ -105,7 +112,7 @@ img{
     border-radius: 50%;
 }
 .table-container {
-    max-height: 400px; /* Set the desired height for the scrollable area */
+    max-height: 400px; 
     overflow: auto;
 }
 
@@ -172,22 +179,31 @@ img{
     background-position: center;
     background-repeat: no-repeat;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.7);
     position: relative;
-    z-index: -1;
-    opacity: 0.8;
     
 }  
+
+.diversify::after{
+	content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure the overlay is on top of the image */
+    background: rgba(0, 0, 0, 0.8);
+	
+}
 .diversify h1 {
     color: #ffffff;
     font-weight: bold; 
-    z-index: 2;
+    z-index: -2;
 }
 
 
 .diversify p {
-    color: #FFD700;
-    font-weight: normal; 
+    color: #ffffff;
+    font-weight: bold; 
     z-index: 2;
 }
 
@@ -219,10 +235,7 @@ img{
     width: 20%;
     margin: 0 auto;
 }
-.social img {
-    width: 10%; 
-    margin: 0; 
-  }
+
 .social li{
     display: inline;
 }
@@ -320,14 +333,23 @@ img{
 }
 
 .custom-submit-button {
-    width: 100%; /* Adjust the width as needed */
+    width: 100%;
 }
 
 /*------------------------------ABOUT PAGE-----------------------------*/
+.about {
+    max-height: 80vh;
+    max-width: 100%; 
+    overflow: hidden;
+}
+
+
 .investment h3{
     font-weight: 100;
+
     color: #FFD700;
 }
+
 
 /*-----------------------------diversity PAGE--------------------------*/
 .Inclusiveness, .Flexibility, .diversity{
@@ -336,11 +358,290 @@ img{
 
 /*-----------------------------sponsoring PAGE--------------------------*/
 .sponsoring {
-    margin-top: 100px; /* You can adjust this value as needed */
+    margin-top: 100px;
 }
 .sponsoring h1 {
-    font-size: 50px; /* You can adjust this value to make the heading bigger */
+    font-size: 50px; 
 }
 .space{
     margin-top: 200px;
 }
+
+/*----------------------------- DEPOSIT PAGE--------------------------*/
+.deposit{
+    margin-top:200px
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.bitcoin-logo {
+    width: 50px; 
+    height: auto; 
+    margin-right: 10px; 
+    animation: spin 20s linear infinite; 
+}
+.custom-button {
+    background-color: #ffa500; 
+    border-color: #ffa500; 
+    color: white; 
+    font-weight: bold; 
+    border-radius: 10px; 
+    padding: 10px 100px;  
+    transition: background-color 0.3s, border-color 0.3s; 
+}
+
+.custom-button:hover {
+    background-color: #ffcc00; 
+    border-color: #ffcc00; 
+}
+
+
+.rounded-check {
+    border-radius: 50%;
+    padding: 5px; 
+    color: white; 
+}
+.custom-card {
+    background: linear-gradient(15deg, #ffffff, #F0EAD6);
+    border: none;
+    color: #000; 
+}
+.payment-image {
+    width: 80px; 
+    height: auto; 
+}
+
+/*--------------------------NAVBAR2 -------------------------------------------*/
+.avatar {
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+    /* Custom CSS to remove border from the toggle button */
+    .navbar-toggler {
+      border: none;
+    }
+    .navbar-toggler:focus, .navbar-toggler:active {
+        outline: none;
+        box-shadow: none;
+    }
+    .nav-item .nav-link i {
+         color: gold;
+    }
+    .navbar-nav .nav-item .nav-link {
+        font-weight: bold;
+        text-decoration: none; /* Remove the default underline */
+        transition: text-decoration 0.5s ease; /* Add a smooth transition for the underline */
+    }
+    
+    .navbar-nav .nav-item .nav-link:hover {
+        text-decoration: underline; /* Underline when hovering */
+        font-size: 1.3em;
+    }
+
+
+
+/*----------------------------- WITHDRAWAL PAGE--------------------------*/
+.withdrawal{
+    margin-top: 50px;
+}
+
+@keyframes spinx {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+.withdrawal-logo{
+    width: 100px; 
+    height: auto; 
+    margin-bottom: 10px; 
+    animation: spinx 10s linear infinite;
+}
+.withdrawal form label {
+    color: #FFD700;
+    font-weight: bold;
+}
+.withdrawal form label {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.withdrawal form input[type="text"],
+.withdrawal form input[type="password"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.withdrawal form input[type="text"]:hover,
+.withdrawal form input[type="password"]:hover {
+    background-color: #444;
+}
+
+.withdrawal form button[type="submit"] {
+    /* Style for submit button */
+    background-color: #FFD700;
+    border-color: #ffa500;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.withdrawal form button[type="submit"]:hover {
+    background-color: #ffcc00; 
+    border-color: #ffcc00;
+}
+
+#request-form input[type="text"]:focus,
+#request-form input[type="password"]:focus,
+#request-form select:focus,
+#request-form textarea:focus {
+    border-color: #FFD700; 
+    outline: none; 
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.5); 
+.form-floating select.form-select option:hover {
+    background-color: black;
+    color: white;
+}
+}
+
+
+
+/*----------------------------- SUPPORT PAGE--------------------------*/
+.support-message {
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.support-message ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.support-message li {
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #FFD700;
+    color: #000;
+    animation: fadeOut 10s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+
+
+
+/*----------------------------- PLAN PAGE--------------------------*/
+
+.btn-gold {
+    background-color: #FFD700;
+    color: #000000;
+   
+}
+
+.btn-black {
+    background-color: #000000;
+    color: #FFFFFF;
+    
+}
+.gold h3{
+    color: #FFD700;
+}
+.currency h1 {
+    color: #FFD700; 
+}
+
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    color: #000;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.plan-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+}
+
+
+.my-card {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%; 
+    max-width: 400px; 
+    margin: 0 auto; 
+    background-color: #000;
+}
+
+
+.my-card form {
+    margin-top: 20px;
+}
+
+
+.my-card button {
+    background-color: gold;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+
+.my-card input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+@media (max-width: 768px) {
+    .my-card {
+        margin-bottom: 20px;
+    }
+}
+
+

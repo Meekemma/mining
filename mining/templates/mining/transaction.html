@@ -1,0 +1,36 @@
+<!-- mining/dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Your Deposits</h1>
+    <ul>
+        {% for deposit in deposits %}
+            <li>Deposit Amount: {{ deposit.deposit_amount }}</li>
+            <li>Status: {{ deposit.status }}</li>
+            <!-- Add more fields as needed -->
+            <br>
+        {% empty %}
+            <li>No deposits found.</li>
+        {% endfor %}
+    </ul>
+
+
+
+    <h1>Your Withdrawals</h1>
+    <ul>
+        {% for withdrawal in withdrawals %}
+            <li>Withdrawal Amount: {{ withdrawal.withdrawal_amount }}</li>
+            <li>Status: {{ withdrawal.status }}</li>
+            <!-- Add more fields as needed -->
+            <br>
+        {% empty %}
+            <li>No withdrawals found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

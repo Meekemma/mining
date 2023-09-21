@@ -1,10 +1,58 @@
-<div class="container mt-4">
-    <h2>Create a New withdrawal</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.withdrawal_amount }}
-        <button type="submit" class="btn btn-primary mt-2">withdrawal</button>
-    </form>
-    <!-- Add a link to the "Track Invoice" page after the form -->
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5b808910ef.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+</head>
+<body>
+    {% include 'mining/navbar2.html'%}
+    <br>
+    <br>
+
+
+    <div class="container my-5">
+        <div class="card custom-card">
+            <div class="card-body">
+                <h5 class="text-warning fw-bolder">Start Request............</h5>
+                <p>  
+                    Please Note that Minimum Withdrawal Amount is $500. 
+                    Contact support@{{domain_name}} for a more detailed description. 
+                    If you encounter any issue while withdrawing from your account,
+                    please contact support@{{domain_name}}.com for assistance.
+                </p>
+            </div>
+        </div>
+        <div class=" withdrawal">
+            <img src="{% static 'images/255759_bitcoin_card_cash_checkout_online shopping_icon.png'%}" alt="" class="withdrawal-logo">
+            <form method="post">
+                {% csrf_token %}
+                
+                {{form|crispy}}
+                
+                <br>
+                <button type="submit" class="btn btn-warning mt-2 custom-button">Submit <i class="fas fa-check-circle rounded-check"></i></button>
+            </form>
+
+        </div>
+       
+
+    </div>
+       
+        
+        
+        
     
-</div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script> 
+    
+</body>
+</html>
+

@@ -25,4 +25,5 @@ admin.site.register(Withdrawal)
 admin.site.register(Deposit)
 admin.site.register(Invoice)
 admin.site.register(Balance)
+admin.site.register(Referral)
 
